@@ -5,38 +5,35 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 interpreted as described in [RFC 2119](http://tools.ietf.org/html/rfc2119).
 
 
-## 1. Overview
+## 1. 개요
 
-This PSR describes a specification for [autoloading][] classes from file
-paths. It is fully interoperable, and can be used in addition to any other
-autoloading specification, including [PSR-0][]. This PSR also describes where
-to place files that will be autoloaded according to the specification.
+이 PSR 에서는 파일경로부터 [autoloading][] 클래스에 대한 내용을 설명합니다. 모두가 공통으로 이용할 수 있고 누구든지 [PSR-0][]를 포함한 다른 자동로딩의 내용에 추가해서 사용할 수 있습니다. 뿐만아니라 명세서에 따라 자동로드될 파일을 배치할 위치도 설명합니다.
 
 
-## 2. Specification
+## 2. 명세서
 
-1. The term "class" refers to classes, interfaces, traits, and other similar
-   structures.
+1. "클래스"는 클래스와 인터페이스, traits, 다른 유사한 구조를 포함합니다.
 
-2. A fully qualified class name has the following form:
+2. 정규화된 클래스명은 다음의 형태와 같습니다:
 
         \<NamespaceName>(\<SubNamespaceNames>)*\<ClassName>
+        
+    1. 정규화된 클래스명은 "vendor namespage"처럼 알려진 최상위 네임스페이스명이 있어야 합니다.
+    
+    2. 정규화된 클래스명은 하나 이상의 sub-namespace를 가질 수 있습니다.
+    
+    3. 정규화된 클래스명은 종료된 클래스명이 있어야 합니다.
+    
+    4. 정규화된 클래스명의 밑줄은 어떤 위치에서도 특별한 의미가 없습니다.
+    
+    5. 정규화된 클래스명은 알파벳 소문자와 대문자의 조합으로 이루어질 수 있습니다.
+    
+    6. 모든 클래스명은 대소문자를 구분해서 참조해야합니다.
+        
+3. 파일을 불러올 때 정규화된 클래스명은...
 
-    1. The fully qualified class name MUST have a top-level namespace name,
-       also known as a "vendor namespace".
+	1. 하나 이상의 namespace와 sub-namespace명에 인접하고있는 
 
-    2. The fully qualified class name MAY have one or more sub-namespace
-       names.
-
-    3. The fully qualified class name MUST have a terminating class name.
-
-    4. Underscores have no special meaning in any portion of the fully
-       qualified class name.
-
-    5. Alphabetic characters in the fully qualified class name MAY be any
-       combination of lower case and upper case.
-
-    6. All class names MUST be referenced in a case-sensitive fashion.
 
 3. When loading a file that corresponds to a fully qualified class name ...
 
@@ -57,7 +54,7 @@ to place files that will be autoloaded according to the specification.
    of any level, and SHOULD NOT return a value.
 
 
-## 3. Examples
+## 3. 예제
 
 The table below shows the corresponding file path for a given fully qualified
 class name, namespace prefix, and base directory.

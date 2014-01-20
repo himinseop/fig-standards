@@ -25,21 +25,15 @@ Users of loggers are refered to as `user`.
 
 ### 1.1 Basics
 
-- The `LoggerInterface` exposes eight methods to write logs to the eight
-  [RFC 5424][] levels (debug, info, notice, warning, error, critical, alert,
-  emergency).
+- `LoggerInterface`는 [RFC 5424][]의 8단계(debug, info, notice, warning, error, critical, alert, emergency) 로그 작성을 위한 8개의 메소드를 나타냅니다.
 
-- A ninth method, `log`, accepts a log level as first argument. Calling this
-  method with one of the log level constants MUST have the same result as
-  calling the level-specific method. Calling this method with a level not
-  defined by this specification MUST throw a `Psr\Log\InvalidArgumentException`
-  if the implementation does not know about the level. Users SHOULD NOT use a
-  custom level without knowing for sure the current implementation supports it.
+- 9번째 메소드인 `log`메소드는 첫번째 변수에 로그단계를 받습니다. 로그단계상수 중 하나와 함꼐 이 메소드를 호출하면 로그단계별 메소드를 호출한것과 결과가 같아야 합니다. 구현된 로그단계에 대해 알지 못해 정의되지 않은 로그단계를 호출한 경우 `Psr\Log\InvalidArgumentException`으로 throw 해야합니다. 사용자들이 정확하게 로그단계를 몰라도 사용자 지정 단계를 사용해서는 안됩니다.
 
 [RFC 5424]: http://tools.ietf.org/html/rfc5424
 
 ### 1.2 Message
 
+- 모든 메소드는 메세지 문구를 받거나 `__toString()` 객체를 받습니다. 
 - Every method accepts a string as the message, or an object with a
   `__toString()` method. Implementors MAY have special handling for the passed
   objects. If that is not the case, implementors MUST cast it to a string.
